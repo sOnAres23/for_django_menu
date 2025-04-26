@@ -1,0 +1,10 @@
+<ul>
+    {% for item in items %}
+        <li class="{% if item in active_items %}active{% endif %}">
+            <a href="{% if item.url.startswith 'http://' or item.url.startswith 'https://' %}{{ item.url }}{% else %}{% url item.url %}{% endif %}">{{ item.title }}</a>
+            {% if item.children.all %}
+                {% include "menu.html" with items=item.children.all %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
